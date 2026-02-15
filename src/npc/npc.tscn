@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://day4qibiawk7y"]
+
+[ext_resource type="Script" uid="uid://dmk5ln2l5pqyt" path="res://src/npc/npc.gd" id="1_vo30r"]
+[ext_resource type="Texture2D" uid="uid://bigb8lowiwln8" path="res://assets/Ellipse 1.svg" id="2_a3p7v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sha5v"]
+radius = 32.0
+
+[node name="Npc" type="Area2D" unique_id=328712650]
+script = ExtResource("1_vo30r")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=2045624631]
+texture = ExtResource("2_a3p7v")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1217249122]
+debug_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1397817848]
+shape = SubResource("CircleShape2D_sha5v")
