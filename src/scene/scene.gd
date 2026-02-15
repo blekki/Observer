@@ -20,6 +20,6 @@ func _process(delta: float) -> void:
 func createDefenders():
 	for i in range(DEFENDERS_COUNT):
 		defenders.push_back(npc_preload.instantiate())
-		defenders[i].position = Vector2(250, 100)
+		defenders[i].position = Vector2(200, 100)
 		add_child(defenders[i])
 	pass

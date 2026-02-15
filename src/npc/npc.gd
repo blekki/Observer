@@ -1,15 +1,15 @@
 # Description: a smart object with its behaviour
 class_name Npc
-extends Entity
+extends CharacterBody2D
 
 # Parameters
 @export var helth: int = 0
 @export var damage: int = 0
 @export var npc_type: Enums.NpcTypes = Enums.NpcTypes.NONE
+@export var speed: float = 10_000
+var delta: float = 0.0		# useful variable copies frame delta time
 
-var delta: float = 0.0
-static var state_machine = StateMachine.new()
-var currect_task: Callable
+var current_state = ActionMove.new()
 
 # <><><> Other conde <><><>
 func _init(npc_type: Enums.NpcTypes = Enums.NpcTypes.NONE) -> void:
@@ -25,7 +25,6 @@ func _init(npc_type: Enums.NpcTypes = Enums.NpcTypes.NONE) -> void:
 		type.ARACHNO:
 			self.helth = prop.ARACHNO_HELTH
 			self.damage = prop.ARACHNO_DAMAGE
-	pass
 	
 func _ready() -> void:
 	pass
@@ -36,10 +35,10 @@ func _process(delta: float) -> void:
 	do_task()
 
 func update_task() -> void:
-	currect_task = state_machine.update_task(self)
+	current_state.update_behavior(self)
 
 func do_task() -> void:
-	currect_task.call()
+	current_state.do_task(self)
 
 func set_navigation_target(new_pos: Vector2) -> void:
 	$NavigationAgent2D.target_position = new_pos
